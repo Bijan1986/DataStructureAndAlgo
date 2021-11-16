@@ -4,7 +4,7 @@
 
 ### Docker commands
 
-```dockerfile
+```shell
 docker --version
 docker run -p 5000:5000 in28min/hello-world-python:0.0.1.RELEASE
 docker run -p 5000:5000 in28min/hello-world-java:0.0.1.RELEASE
@@ -92,6 +92,7 @@ docker-compose config
 docker-compose images
 docker-compose ps
 docker-compose top
+
 ```
 
 ### Docker detached mode(-d) and Logs
@@ -138,7 +139,93 @@ docker container stop <container-id>: <br>used to stop the container <br>
 we can say that the docker uses the client-server architecture .<br>
 Docker client is the client and the Docker server is the server . <br>
 
+so when we run a "docker run " command , the docker client sends it to the daemon .
+Docker daemon is responsible for executing that specific command .
+
+
 
                   
+### Docker image
+
+docker pull mysql : it will pull the image from the docker registry .
+
+images are built with number of layers .
+
+to see the layers you can use : docker image history imageid
+
+To look at the details behind each images : docker image inspect imageid
+
+To remove a docker imaged : docker image remove image-id
+
+### Docker Container
+
+to pause the running container : docker container pause container-id
+
+to unpause a container : docker container unpause container-id
+
+to stop a container : docker container stop container-id
+
+to kill a container:
+
+>  **Diffrernce between kill and stop command**
+> 
+> The stop command will wait for the application to close all the connections before shutting down .
+> 
+> The kill command won't wait , it will shut down everything right away .
+
+docker container inspect container-id : this will give you more details about the container
+
+docker container prune : This will delete all unused containers 
+
+### Learning Docker commands : Docker system and Docker stat
+
+#### docker system
+
+```shell
+  df          Show docker disk usage
+  events      Get real time events from the server
+  info        Display system-wide information
+  prune       Remove unused data
+  
+  -- now try to run the df command
+  
+λ docker system df
+TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE
+Images          5         0         1.026GB   1.026GB (100%)
+Containers      0         0         0B        0B
+Local Volumes   0         0         0B        0B
+Build Cache     21        0         30.09MB   30.09MB
+
+λ docker system prune
+WARNING! This will remove:
+  - all stopped containers
+  - all networks not used by at least one container
+  - all dangling images
+  - all dangling build cache
+
+Are you sure you want to continue? [y/N] y
+
+
+
+```
+
+docker system prune -a : will remove all images and containers that are not in running stages .
+
+#### stats
+
+docker stats container-id : the stats about the specific container .
+
+to make sure a container uses upto a certain amount of memory use the below
+
+> docker run -d -p 5000:5000 **-m 512** in28min/hello-world-java:0.0.1.RELEASE
+
+we can also control how much CPU we want to give to a container as well .
+
+> docker run -d -p 5000:5000 -m 512 --cpu-quota=50000 in28min/hello-world-java:0.0.1.RELEASE
+> 
+
+
+
+ 
 
 
