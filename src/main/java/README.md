@@ -242,4 +242,6 @@ after insertion in the middle the values are :
 ```
 
 
+# LinkedList deletion
+
 
