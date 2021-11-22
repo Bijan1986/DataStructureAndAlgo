@@ -11,8 +11,137 @@ and a pointer to the next node .
 Linked list the elements are scattered but the pointers help to keep the order in place .</P>
 
 > Linkedlist is created in the heap
+### How to create a linked list 
+
+well there are 3 steps 
+
+![img.png](img.png)
+> Write a program to create a singly linked list 
+> 
+```java
+public class Node {
+    public int data;
+    public Node next;
+}
+
+public class SingleLinkedList{
+    Node head;
+    Node tail;
+    int size;
+
+    Node makeSingleLinkeList(int val){
+        Node singleNode = new Node();
+        singleNode.data = val;
+        singleNode.next = null;
+        head = singleNode;
+        tail = singleNode;
+        size = 1;
+        return singleNode;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        SingleLinkedList sl = new SingleLinkedList();
+        sl.makeSingleLinkeList(10);
+        System.out.println("The value in the linked list is :"+sl.head.data);
+
+    }
+}
 
 
+```
+### Insertion method in a single linked list
+
+```java
+package linkedlist2;
+
+public class LinkedList2 {
+  public Node2 head;
+  public Node2 tail;
+  public int size;
+
+  public Node2 createSingleLinkedList(int data) {
+    Node2 newNode = new Node2(data);
+    head = newNode;
+    tail = newNode;
+    size = 1;
+    return head;
+
+  }
+
+  public void inserIntoLinkedList(int val, int location) {
+    Node2 node = new Node2(val);
+    if (head == null) {
+      createSingleLinkedList(val);
+      return;
+    } else if (location == 0) { // beginning of the linked list
+      node.next = head;
+      head = node;
+    } else if (location >= size) { // at the end of the linkedlist
+      tail.next = node;
+      node.next = null;
+      tail = node;
+    } else { // in between
+      Node2 tempNode = head; // start iterating through each node starting from head
+      int index = 0;
+      while(index < location -1){
+        tempNode = tempNode.next;
+        index ++;
+      }
+      Node2 nextNode = tempNode.next;
+      tempNode.next = node;
+      node.next  = nextNode;
+    }
+    size ++;
+  }
+
+  public void displayLInkedListValue() {
+    if (head != null) {
+      System.out.println("Singly linked list value is :" + head.data);
+    }
+  }
+}
+
+
+import linkedlist2.*;
+
+public class Main {
+    public static void main(String[] args) {
+        LinkedList2 linkedList2 = new LinkedList2();
+        linkedList2.createSingleLinkedList(10);
+        System.out.println("The value of head is "+linkedList2.head.data);
+        System.out.println("_______________________________");
+        System.out.println("Add a new head");
+        linkedList2.inserIntoLinkedList(20, 0);
+        System.out.println("The value of head is "+linkedList2.head.data);
+        System.out.println("The value of tail is "+linkedList2.tail.data);
+        System.out.println("The size is "+linkedList2.size);
+        System.out.println("_______________________________");
+        System.out.println("Add a new tail");
+        linkedList2.inserIntoLinkedList(30, 3);
+        System.out.println("The value of head is "+linkedList2.head.data);
+        System.out.println("The value of tail is "+linkedList2.tail.data);
+        System.out.println("The size is "+linkedList2.size);
+    }
+}
+
+/**
+ * output
+ * The value of head is 10
+ _______________________________
+ Add a new head
+ The value of head is 20
+ The value of tail is 10
+ The size is 2
+ _______________________________
+ Add a new tail
+ The value of head is 20
+ The value of tail is 30
+ The size is 3
+ */
+
+```
 ## how to define a node?
 
 To define a node, we need two things .
@@ -133,6 +262,9 @@ we can insert node in a linked list in 3 positions
 2. at the end (make it tail)
 3. after a certain node
 
+adding element to the beginning of the linked list is quicker .
+adding element to the end of the linked list is more time consuming .
+
 ### At the front of the linked list
 
 ```java
@@ -240,7 +372,19 @@ after insertion in the middle the values are :
  */
     
 ```
+## Traversal of the linked list
+```
+public void displayLInkedListValue() {
+    if (head != null) {
+      Node2 tempNode = head;
+      for (int i=0; i<size; i++){
+        System.out.print(tempNode.data+" ");
+        tempNode = tempNode.next;
+      }
+    }
+  }
 
+```
 
 # LinkedList deletion
 
